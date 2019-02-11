@@ -20,8 +20,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event updateEvent(Event event) {
-        return eventDao.saveAndFlush(event);
+    public Event updateEvent(Event event, Long id) {
+        Event _event = this.getEvent(id);
+        _event.setEvent_date((event.getEvent_date() != null) ? event.getEvent_date() : _event.getEvent_date() );
+        _event.setEvent_description(event.getEvent_description() != null  ? event.getEvent_description() : _event.getEvent_description());
+        _event.setEvent_type(event.getEvent_type() != null ? event.getEvent_type() : _event.getEvent_type() );
+        return eventDao.save(_event);
     }
 
     @Override
@@ -39,5 +43,10 @@ public class EventServiceImpl implements EventService {
         eventDao.deleteById(id);
     }
 
-
+    @Override
+    public Event updateStatus(Long id) {
+        Event _event = this.getEvent(id);
+        _event.setIs_finish(!_event.getIs_finish());
+        return eventDao.save(_event);
+    }
 }

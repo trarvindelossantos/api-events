@@ -20,8 +20,10 @@ public class EventTypeServiceImpl implements EventTypeService {
     }
 
     @Override
-    public EventType updateEventType(EventType eventType) {
-        return eventTypeDao.saveAndFlush(eventType);
+    public EventType updateEventType(EventType eventType, Integer id) {
+        EventType eType = this.getEventType(id);
+        eType.setDescription( (eventType.getDescription() != null ||eventType.getDescription() != "") ? eventType.getDescription() : eType.getDescription());
+        return eventTypeDao.save(eType);
     }
 
     @Override
@@ -32,5 +34,10 @@ public class EventTypeServiceImpl implements EventTypeService {
     @Override
     public EventType getEventType(Integer id) {
         return eventTypeDao.getOne(id);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        eventTypeDao.deleteById(id);
     }
 }

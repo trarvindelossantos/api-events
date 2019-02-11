@@ -8,7 +8,7 @@ public interface EventService {
 
     Event saveEvent(Event event);
 
-    Event updateEvent(Event event);
+    Event updateEvent(Event event, Long id);
 
     List<Event> events();
 
@@ -16,4 +16,8 @@ public interface EventService {
 
 
     void deleteEvent(Long id);
+
+    Event updateStatus(Long id);
+
+
 }

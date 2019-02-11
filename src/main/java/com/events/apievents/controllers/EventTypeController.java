@@ -31,9 +31,12 @@ public class EventTypeController {
 
     @PutMapping("/api/event-types/{id}")
     public EventType update(@PathVariable(name = "id") Integer id, @RequestBody EventType eventType){
-        EventType eventTypeData = eventTypeService.getEventType(id);
-        eventTypeData.setDescription(eventType.getDescription());
-        return eventTypeService.saveEventType(eventTypeData);
+        return eventTypeService.updateEventType(eventType, id);
+    }
+
+    @DeleteMapping("/api/event-types/{id}")
+    public  void delete(@PathVariable(name = "id") Integer id){
+        eventTypeService.delete(id);
     }
 
 }

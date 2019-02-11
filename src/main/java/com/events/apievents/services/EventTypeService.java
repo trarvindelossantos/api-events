@@ -9,12 +9,12 @@ public interface EventTypeService {
 
     EventType saveEventType(EventType eventType);
 
-    EventType updateEventType(EventType eventType);
+    EventType updateEventType(EventType eventType, Integer id);
 
     List<EventType> eventTypes();
 
     EventType getEventType(Integer id);
 
-
+    void delete(Integer id);
 
 }

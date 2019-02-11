@@ -30,20 +30,15 @@ public class EventController {
 
     @PutMapping("/api/events/{id}")
     public  Event update(@PathVariable(name = "id") Long id, @RequestBody Event event) {
-        Event _event = eventService.getEvent(id);
-        _event.setEvent_date((event.getEvent_date() != null) ? event.getEvent_date() : _event.getEvent_date() );
-        _event.setEvent_description(event.getEvent_description() != null  ? event.getEvent_description() : _event.getEvent_description());
-        _event.setEvent_type(event.getEvent_type() != null ? event.getEvent_type() : _event.getEvent_type() );
-        return  eventService.saveEvent(_event);
+        return  eventService.updateEvent(event, id);
     }
 
     @PutMapping("/api/events/{id}/status")
-    public  Event updateStatus(@PathVariable(name = "id") Long id, @RequestBody Event event){
-        Event eventData = eventService.getEvent(id);
-        eventData.setIs_finish(!eventData.getIs_finish());
-        return  eventService.saveEvent(eventData);
+    public  Event updateStatus(@PathVariable(name = "id") Long id){
+        return  eventService.updateStatus(id);
     }
 
+    @DeleteMapping("/api/events/{id}")
     public  void delete(@PathVariable(name = "id") Long id) {
         eventService.deleteEvent(id);
     }
